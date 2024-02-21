@@ -15,11 +15,11 @@ By default, the container listens on port 3000. The port is configurable using t
 All requests must by send in POST to the `/convert` endpoint with a `multipart/form-data` content type. The request must contain a PDF file with the key `file`. 
 
 Additional parameters can be sent to customize the conversion process:
-* `raw`: If set to `true`, the server returns the raw text extracted from the PDF as `text/plain`, else the text is return in JSON format. Default is `false`.
 * `firstPage`: The first page to extract. Default is `1`.
 * `lastPage`: The last page to extract. Default is the last page of the document.
 * `password`: The password to unlock the PDF. Default is none.
 * `normalizeWhitespace`: If set to `true`, the server normalizes the whitespace in the extracted text. Default is `true`.
+* `raw`: If set to `true`, the server returns the raw text extracted from the PDF as `text/plain`, else the text is returned as `text/json`. Default is `false`.
 
 The server returns `200` if the conversion was successful and the images are available in the response body. In case of error, the server returns a `400` status code with a JSON object containing the error message (format: `{error: string}`).
 
