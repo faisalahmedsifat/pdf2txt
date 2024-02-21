@@ -1,0 +1,14 @@
+services:
+  pdf2text:
+    image: codeinchq/pdf2text:latest
+    build:
+      context: .
+      target: pdf2text-dev
+      platforms:
+        #- linux/amd64
+        - linux/arm64
+    volumes:
+      - ./:/app/
+    ports:
+      - "3000:3000"
+    tty: true
