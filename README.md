@@ -19,7 +19,7 @@ Additional parameters can be sent to customize the conversion process:
 * `lastPage`: The last page to extract. Default is the last page of the document.
 * `password`: The password to unlock the PDF. Default is none.
 * `normalizeWhitespace`: If set to `true`, the server normalizes the whitespace in the extracted text. Default is `true`.
-* `raw`: If set to `true`, the server returns the raw text extracted from the PDF as `text/plain`, else the text is returned as `text/json`. Default is `false`.
+* `format`: The output format. Supported values are `text` (the server returns the raw text as `text/plain`) or `json` (the server returns a JSON object as `text/json`). Default is `text`.
 
 The server returns `200` if the conversion was successful and the images are available in the response body. In case of error, the server returns a `400` status code with a JSON object containing the error message (format: `{error: string}`).
 
@@ -36,15 +36,17 @@ Convert a PDF file to text with a JSON response:
 curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert -o example.json
 ```
 
-Convert a password-protected PDF file to text with a JSON response:
+Convert a PDF file to text:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" http://localhost:3000/convert -o example.json
+curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert
 ```
 
-Convert a PDF file to text with a raw text response:
+Extract a password-protected PDF file's text content as JSON and save it to a file:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" -F "raw=true" http://localhost:3000/convert -o example.txt
+curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" -F "format=json" http://localhost:3000/convert -o example.json
 ```
+
+
 
 ## License
 

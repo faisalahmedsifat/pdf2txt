@@ -49,8 +49,16 @@ app.post('/convert', upload.single('file'), async (req, res) => {
             }
         )();
 
-        // send the text
-        if (req.body.raw === "true") {
+        // send the content as raw text or JSON
+        if (String(req.body.format).toLowerCase() === "json") {
+            delete extractResult.filename;
+
+            extractResult.pages.forEach(page => {
+                page.content.forEach(content => delete content.fontName);
+            });
+
+            res.json(extractResult);
+        } else {
             res.send(
                 extractResult.pages.reduce(
                     (acc1, page) => acc1 + page.content.reduce(
@@ -60,14 +68,6 @@ app.post('/convert', upload.single('file'), async (req, res) => {
                     '',
                 ),
             );
-        } else {
-            delete extractResult.filename;
-
-            extractResult.pages.forEach(page => {
-                page.content.forEach(content => delete content.fontName);
-            });
-
-            res.json(extractResult);
         }
 
         // cleaning up
