@@ -1,9 +1,9 @@
 services:
-  pdf2text:
-    image: pdf2text
+  pdf2txt:
+    image: pdf2txt
     build:
       context: .
-      target: pdf2text-dev
+      target: pdf2txt-dev
       platforms:
         #- linux/amd64
         - linux/arm64

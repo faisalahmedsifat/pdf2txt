@@ -1,5 +1,5 @@
 {
-  "name": "pdf2text",
+  "name": "pdf2txt",
   "type": "module",
   "license": "MIT",
   "author": "Joan Fabrégat <joan@codeinc.co>",

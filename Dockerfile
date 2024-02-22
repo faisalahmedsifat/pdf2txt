@@ -1,7 +1,7 @@
 ####################################################################################################
-# PDF2TEXT
+# PDF2TXT
 ####################################################################################################
-FROM --platform=$TARGETPLATFORM node:21-alpine AS pdf2text
+FROM --platform=$TARGETPLATFORM node:21-alpine AS pdf2txt
 
 ENV PORT=3000
 ENV NODE_ENV=production
@@ -9,9 +9,9 @@ WORKDIR /app
 
 
 ####################################################################################################
-# PDF2TEXT dev
+# PDF2TXT dev
 ####################################################################################################
-FROM pdf2text AS pdf2text-dev
+FROM pdf2txt AS pdf2txt-dev
 
 ENV NODE_ENV=development
 RUN npm install --global nodemon
@@ -21,9 +21,9 @@ ENTRYPOINT ["nodemon", "main.mjs"]
 
 
 ####################################################################################################
-# PDF2TEXT prod
+# PDF2TXT prod
 ####################################################################################################
-FROM pdf2text AS pdf2text-prod
+FROM pdf2txt AS pdf2txt-prod
 
 COPY main.mjs /app/
 COPY package.json /app/

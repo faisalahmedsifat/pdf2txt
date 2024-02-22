@@ -31,14 +31,14 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: codeinchq/pdf2text
+          images: codeinchq/pdf2txt
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          target: pdf2text-prod
+          target: pdf2txt-prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

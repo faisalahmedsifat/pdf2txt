@@ -1,10 +1,10 @@
-# pdf2text
+# pdf2txt
 
-[![Docker Image CI](https://github.com/codeinchq/pdf2text/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2text/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
 
 This repository contains a simple containerized API to convert PDF documents to text using [Mozilla's pdf.js](https://mozilla.github.io/pdf.js/) and [pdf.js-extract](https://www.npmjs.com/package/pdf.js-extract).
 
-The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/pdf2text) under the name `codeinchq/pdf2text`.
+The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/pdf2txt) under the name `codeinchq/pdf2text`.
 
 ## Configuration
 
@@ -27,7 +27,7 @@ The server returns `200` if the conversion was successful and the images are ava
 
 ### Step 1: run the container using Docker
 ```bash
-docker run -p "3000:3000" codeinchq/pdf2text 
+docker run -p "3000:3000" codeinchq/pdf2txt 
 ```
 
 ### Step 2: convert a PDF file to text
