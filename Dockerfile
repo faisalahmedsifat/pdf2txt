@@ -7,6 +7,19 @@ ENV PORT=3000
 ENV NODE_ENV=production
 WORKDIR /app
 
+
+####################################################################################################
+# PDF2TEXT dev
+####################################################################################################
+FROM pdf2text AS pdf2text-dev
+
+ENV NODE_ENV=development
+RUN npm install --global nodemon
+
+EXPOSE $PORT
+ENTRYPOINT ["nodemon", "main.mjs"]
+
+
 ####################################################################################################
 # PDF2TEXT prod
 ####################################################################################################
@@ -19,15 +32,3 @@ RUN npm install --production
 
 EXPOSE $PORT
 ENTRYPOINT ["node", "main.mjs"]
-
-
-####################################################################################################
-# PDF2TEXT dev
-####################################################################################################
-FROM pdf2text AS pdf2text-dev
-
-ENV NODE_ENV=development
-RUN npm install --global nodemon
-
-EXPOSE $PORT
-ENTRYPOINT ["nodemon", "main.mjs"]
