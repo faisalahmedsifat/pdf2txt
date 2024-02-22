@@ -23,19 +23,18 @@ Additional parameters can be sent to customize the conversion process:
 
 The server returns `200` if the conversion was successful and the images are available in the response body. In case of error, the server returns a `400` status code with a JSON object containing the error message (format: `{error: string}`).
 
-## Example
+### Example
 
-### Step 1: run the container using Docker
+#### Step 1: run the container using Docker
 ```bash
 docker run -p "3000:3000" codeinchq/pdf2txt 
 ```
 
-### Step 2: convert a PDF file to text
+#### Step 2: convert a PDF file to text
 Convert a PDF file to text with a JSON response:
 ```bash
 curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert -o example.json
 ```
-
 Convert a PDF file to text:
 ```bash
 curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert
@@ -46,6 +45,9 @@ Extract a password-protected PDF file's text content as JSON and save it to a fi
 curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" -F "format=json" http://localhost:3000/convert -o example.json
 ```
 
+## Client
+
+A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/pdf2txt-php-client) and [Packagist](https://packagist.org/packages/codeinc/pdf2txt-client).
 
 
 ## License
