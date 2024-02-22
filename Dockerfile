@@ -28,7 +28,7 @@ FROM pdf2text AS pdf2text-prod
 COPY main.mjs /app/
 COPY package.json /app/
 COPY package-lock.json /app/
-RUN npm install --production
+RUN npm install --omit=dev
 
 EXPOSE $PORT
 ENTRYPOINT ["node", "main.mjs"]
