@@ -8,8 +8,8 @@
 
 import express from 'express';
 import multer from 'multer';
-import * as fs from "fs";
 import {PDFExtract} from "pdf.js-extract";
+import {unlinkSync} from "fs";
 
 const port = +(process.env.PORT ?? 3000);
 const tempDir = 'temp';
@@ -27,13 +27,13 @@ app.post('/convert', upload.single('file'), async (req, res) => {
     console.log(`Converting PDF ${req.file.originalname} to text`);
     try {
         // extracting the text from the PDF file
-        const text = await (
+        const extractResult = await (
             /** @return {Promise<PDFExtract.PDFExtractResult>} */
             async () => {
                 const pdfExtract = new PDFExtract();
                 const options = {
-                    firstPage: req.body.firstPage ?? 1,
-                    lastPage: req.body.lastPage ?? undefined,
+                    firstPage: req.body.firstPage ? +req.body.firstPage : 1,
+                    lastPage: req.body.lastPage ? +req.body.lastPage : undefined,
                     password: req.body.password ?? undefined,
                     normalizeWhitespace: req.body.normalizeWhitespace !== 'false',
                 };
@@ -51,24 +51,33 @@ app.post('/convert', upload.single('file'), async (req, res) => {
 
         // send the text
         if (req.body.raw === "true") {
-            let rawText = '';
-            text.pages.forEach((page) => {
-                rawText += page.content.reduce((acc, content) => acc + content.str, '');
+            res.send(
+                extractResult.pages.reduce(
+                    (acc1, page) => acc1 + page.content.reduce(
+                        (acc2, content) => acc2 + content.str,
+                        '',
+                    ),
+                    '',
+                ),
+            );
+        } else {
+            delete extractResult.filename;
+
+            extractResult.pages.forEach(page => {
+                page.content.forEach(content => delete content.fontName);
             });
 
-            res.send(rawText);
-        } else {
-            res.json(text);
+            res.json(extractResult);
         }
 
         // cleaning up
-        fs.unlinkSync(req.file.path);
+        unlinkSync(req.file.path);
     }
     catch (e) {
-        console.error(e.message);
+        console.error(`Error converting PDF "${req.file.originalname}" to text: ${e.message}`);
         res.status(400);
         res.send({error: e.message});
-        fs.unlinkSync(req.file.path);
+        unlinkSync(req.file.path);
     }
 });
 
