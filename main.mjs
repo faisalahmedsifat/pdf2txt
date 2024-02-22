@@ -38,10 +38,10 @@ app.post('/convert', upload.single('file'), async (req, res) => {
                     normalizeWhitespace: req.body.normalizeWhitespace !== 'false',
                 };
 
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     pdfExtract.extract(req.file.path, options, (err, data) => {
                         if (err) {
-                            throw err;
+                            reject(err);
                         }
                         return resolve(data);
                     });
