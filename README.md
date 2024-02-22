@@ -52,4 +52,4 @@ A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/pdf2txt-
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/codeinchq/pdf2txt?tab=MIT-1-ov-file) file for details.
