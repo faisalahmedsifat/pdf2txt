@@ -1,6 +1,6 @@
 services:
   pdf2text:
-    image: codeinchq/pdf2text:latest
+    image: pdf2text
     build:
       context: .
       target: pdf2text-dev
