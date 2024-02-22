@@ -61,12 +61,15 @@ app.post('/convert', upload.single('file'), async (req, res) => {
         } else {
             res.send(
                 extractResult.pages.reduce(
-                    (acc1, page) => acc1 + page.content.reduce(
-                        (acc2, content) => acc2 + content.str,
-                        '',
-                    ),
+                    (acc1, page) => {
+                        const pageContent = page.content.reduce(
+                            (acc2, content) => content.str ? acc2 + '\n' + content.str : acc2,
+                            '',
+                        );
+                        return pageContent ? acc1 + '\n' + pageContent : acc1;
+                    },
                     '',
-                ),
+                ).trim(),
             );
         }
 
