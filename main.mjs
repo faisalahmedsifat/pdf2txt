@@ -17,8 +17,8 @@ const tempDir = 'temp';
 const app = express();
 const upload = multer({dest: tempDir});
 
-    if (!req.file.filename) {
 app.post('/extract', upload.single('file'), async (req, res) => {
+    if (!req.file?.filename) {
         res.status(400);
         res.send({error: 'No file uploaded'});
         return;
