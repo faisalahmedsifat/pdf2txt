@@ -1,6 +1,6 @@
 services:
   pdf2txt:
-    image: pdf2txt
+    image: pdf2txt-dev
     build:
       context: .
       target: pdf2txt-dev
