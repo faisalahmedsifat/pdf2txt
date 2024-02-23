@@ -12,7 +12,7 @@ By default, the container listens on port 3000. The port is configurable using t
 
 ## Usage
 
-All requests must by send in POST to the `/convert` endpoint with a `multipart/form-data` content type. The request must contain a PDF file with the key `file`. 
+All requests must by send in POST to the `/extract` endpoint with a `multipart/form-data` content type. The request must contain a PDF file with the key `file`. 
 
 Additional parameters can be sent to customize the conversion process:
 * `firstPage`: The first page to extract. Default is `1`.
@@ -33,16 +33,16 @@ docker run -p "3000:3000" codeinchq/pdf2txt
 #### Step 2: convert a PDF file to text
 Convert a PDF file to text with a JSON response:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert -o example.json
+curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/extract -o example.json
 ```
 Convert a PDF file to text:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/convert
+curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/extract
 ```
 
 Extract a password-protected PDF file's text content as JSON and save it to a file:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" -F "format=json" http://localhost:3000/convert -o example.json
+curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" -F "format=json" http://localhost:3000/extract -o example.json
 ```
 
 ## Client
