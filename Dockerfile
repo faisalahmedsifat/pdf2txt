@@ -1,7 +1,7 @@
 ####################################################################################################
 # PDF2TXT
 ####################################################################################################
-FROM --platform=$TARGETPLATFORM node:21-alpine AS pdf2txt
+FROM --platform=$TARGETPLATFORM node:lts-slim AS pdf2txt
 
 ENV PORT=3000
 ENV NODE_ENV=production
