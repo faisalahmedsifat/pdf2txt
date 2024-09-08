@@ -1,10 +1,11 @@
 {
-  "name": "pdf2txt",
+  "name": "pdf2txt-ds",
   "type": "module",
   "license": "MIT",
-  "author": "Joan Fabrégat <joan@codeinc.co>",
+  "author": "Faisal Ahmed Sifat <faisal.ahmed20@northsouth.edu>",
   "main": "main.mjs",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
     "pdf.js-extract": "^0.2.1"

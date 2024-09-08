@@ -1,34 +1,23 @@
-####################################################################################################
-# PDF2TXT
-####################################################################################################
-FROM --platform=$TARGETPLATFORM node:lts-slim AS pdf2txt
+# Use the official Node.js image
+FROM node:lts-slim
 
-ENV PORT=3000
-ENV NODE_ENV=production
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy package.json and package-lock.json first to install dependencies
+COPY package*.json ./
 
-####################################################################################################
-# PDF2TXT dev
-####################################################################################################
-FROM pdf2txt AS pdf2txt-dev
+# Install dependencies
+RUN npm install
 
-ENV NODE_ENV=development
-RUN npm install --global nodemon
+# Copy the rest of the application code
+COPY . .
 
-EXPOSE $PORT
-ENTRYPOINT ["nodemon", "main.mjs"]
+# Expose the port the app runs on
+EXPOSE 6789
 
+# Set environment variable for port
+ENV PORT=6789
 
-####################################################################################################
-# PDF2TXT prod
-####################################################################################################
-FROM pdf2txt AS pdf2txt-prod
-
-COPY main.mjs /app/
-COPY package.json /app/
-COPY package-lock.json /app/
-RUN npm install --omit=dev
-
-EXPOSE $PORT
-ENTRYPOINT ["node", "main.mjs"]
+# Command to run the app
+CMD ["node", "main.mjs"]

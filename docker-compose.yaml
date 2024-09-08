@@ -1,14 +1,13 @@
+
 services:
-  pdf2txt:
-    image: pdf2txt-dev
+  web:
     build:
       context: .
-      target: pdf2txt-dev
-      platforms:
-        #- linux/amd64
-        - linux/arm64
+      dockerfile: Dockerfile
     volumes:
-      - ./:/app/
+      - .:/services
     ports:
-      - "3000:3000"
-    tty: true
+      - "6789:6789"
+    environment:
+      - PORT=6789
+    command: ["node", "main.mjs"]
